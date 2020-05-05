@@ -22,8 +22,9 @@ async function arrangeBrowserAndPage(pageUrl) {
 }
 
 async function itShouldHaveTitle(pagePuppet) {
-  const actual = await actGetTitle(pagePuppet);
   const expected = 'bitAdemy';
+  console.info(`it Should Have Title: ${expected}`);
+  const actual = await actGetTitle(pagePuppet);
   return assertEqual(actual, expected);
 }
 
@@ -32,11 +33,12 @@ async function actGetTitle(pagePuppet) {
 }
 
 async function itShouldHavePropperContentLength(pagePuppet) {
-  const actual = await actGetContentLength(pagePuppet);
   const kiloByte = 1024;
   const maximunExpected = kiloByte * 30;
-  const message = `Actual Size ${actual} is bigger than maximun expected ${maximunExpected}`;
-  return assertTrue(actual < maximunExpected, message);
+  console.info(`it Should Have Propper Content Length less than: ${maximunExpected}`);
+  const actual = await actGetContentLength(pagePuppet);
+  const failMessage = `Actual Size ${actual} is bigger than maximun expected ${maximunExpected}`;
+  return assertTrue(actual < maximunExpected, failMessage);
 }
 
 async function actGetContentLength(pagePuppet) {
@@ -48,18 +50,18 @@ function assertEqual(actual, expected) {
   try {
     assert.strictEqual(actual, expected);
     return 0;
-  } catch (err) {
-    console.warn({ err });
+  } catch (error) {
+    console.warn({ error });
     return 1;
   }
 }
 
-function assertTrue(actual, expected, message) {
+function assertTrue(actual, failMessage) {
   try {
-    assert(actual, expected, message);
+    assert.ok(actual, failMessage);
     return 0;
-  } catch (err) {
-    console.warn({ err });
+  } catch (error) {
+    console.warn({ error });
     return 1;
   }
 }
