@@ -2,23 +2,33 @@ const puppeteer = require('puppeteer');
 const assert = require('assert').strict;
 
 async function start() {
-  let numErrors = 0;
+  const { browser, pagePuppet } = await arrangeBrowser();
   const inputPageUrl = 'https://www.bitademy.com';
-  const { browser, pagePuppet } = await arrangeBrowserAndPage(inputPageUrl);
+  let numErrors = 0;
+  numErrors += await itShouldExist(pagePuppet, inputPageUrl);
   numErrors += await itShouldHaveTitle(pagePuppet);
   numErrors += await itShouldHavePropperContentLength(pagePuppet);
   await afterAll(browser, numErrors);
 }
 
-async function arrangeBrowserAndPage(pageUrl) {
-  console.info(`arranging browser for visiting page: ${pageUrl}`);
+async function arrangeBrowser() {
+  console.info(`arranging browser `);
   const browser = await puppeteer.launch({
     headless: true
   });
   const pagePuppet = await browser.newPage();
-  await pagePuppet.goto(pageUrl, { waitUntil: 'networkidle2' });
-  console.info(`visited ${pageUrl}`);
   return { browser, pagePuppet };
+}
+
+async function itShouldExist(pagePuppet, pageUrl) {
+  console.info(`it Should Exist a page: ${pageUrl}`);
+  try {
+    await pagePuppet.goto(pageUrl, { waitUntil: 'networkidle2' });
+    return 0;
+  } catch (error) {
+    console.warn({ error });
+    return 1;
+  }
 }
 
 async function itShouldHaveTitle(pagePuppet) {
