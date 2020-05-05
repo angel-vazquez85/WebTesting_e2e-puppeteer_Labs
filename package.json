@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "nodemon main.js",
-    "deploy": "standard-version"
+    "deploy": "standard-version && git push --follow-tags origin master"
   },
   "devDependencies": {
     "eslint": "6.8.0",
