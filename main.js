@@ -27,9 +27,9 @@ async function arrangeBrowser() {
 async function afterAll(browser, numErrors) {
   await browser.close();
   if (numErrors) {
-    console.warn(`there are ${numErrors} site errors`);
+    console.warn(`🔴 FAIL: there are ${numErrors} site errors`);
   } else {
-    console.info('test completed successfully');
+    console.info('🟩 SUCCES: test completed successfully');
   }
   process.exit(numErrors);
 }
