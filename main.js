@@ -1,14 +1,12 @@
 const puppeteer = require('puppeteer');
 const itShouldExist = require('./tests/existence');
-const itShouldHaveTitle = require('./tests/content');
-const itShouldHavePropperContentLength = require('./tests/content');
+const { itShouldHaveTitle, itShouldHavePropperContentLength } = require('./tests/content');
 const itShouldAllowSubscribe = require('./tests/interaction');
 
 async function start() {
   const { browser, pagePuppet } = await arrangeBrowser();
-  const inputPageUrl = 'https://www.bitademy.com';
   let numErrors = 0;
-  numErrors += await itShouldExist(pagePuppet, inputPageUrl);
+  numErrors += await itShouldExist(pagePuppet);
   numErrors += await itShouldHaveTitle(pagePuppet);
   numErrors += await itShouldHavePropperContentLength(pagePuppet);
   numErrors += await itShouldAllowSubscribe(pagePuppet);
@@ -29,7 +27,7 @@ async function afterAll(browser, numErrors) {
   if (numErrors) {
     console.warn(`🔴 FAIL: there are ${numErrors} site errors`);
   } else {
-    console.info('🟩 SUCCES: test completed successfully');
+    console.info('🟩 SUCCESS: all tests completed successfully');
   }
   process.exit(numErrors);
 }

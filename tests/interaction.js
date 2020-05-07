@@ -1,4 +1,6 @@
+const { assertTrue } = require('../lib/assert');
 module.exports = async function itShouldAllowSubscribe(pagePuppet) {
+  let errors = 1;
   console.info(`GIVEN a page with a subscribe form `);
   try {
     console.info(`  WHEN we select the input `);
@@ -8,13 +10,12 @@ module.exports = async function itShouldAllowSubscribe(pagePuppet) {
     console.info(`  AND WHEN we click on the subscribe button `);
     await actClick(pagePuppet, '#subscribe-form > button');
     console.info(`    THEN it Should Allow Subscribe`);
-    console.info(`      🟩 SUCCESS `);
-    return 0;
+    errors = 0;
   } catch (error) {
-    console.info(`      🔴 FAIL `);
     console.warn({ error });
-    return 1;
   }
+  assertTrue(errors == 0, `Could not complete subscribe process`);
+  return errors;
 };
 
 async function actSelect(pagePuppet, selector) {

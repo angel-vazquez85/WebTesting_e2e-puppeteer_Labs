@@ -1,14 +1,16 @@
-module.exports = async function itShouldExist(pagePuppet, pageUrl) {
-  console.info(`GIVEN the url: ${pageUrl}`);
+const { assertTrue } = require('../lib/assert');
+module.exports = async function itShouldExist(pagePuppet) {
+  let errors = 1;
+  const inputPageUrl = 'https://www.bitademy.com';
+  console.info(`GIVEN the url: ${inputPageUrl}`);
   try {
     console.info(`  WHEN is visited`);
-    await pagePuppet.goto(pageUrl, { waitUntil: 'networkidle2' });
-    console.info(`    THEN it Should Exist a page: ${pageUrl}`);
-    console.info(`      🟩 SUCCESS `);
-    return 0;
+    await pagePuppet.goto(inputPageUrl, { waitUntil: 'networkidle2' });
+    console.info(`    THEN it Should Exist a page: ${inputPageUrl}`);
+    errors = 0;
   } catch (error) {
-    console.info(`      🔴 FAIL `);
     console.warn({ error });
-    return 1;
   }
+  assertTrue(errors == 0, `Could not visit the url: ${inputPageUrl}`);
+  return errors;
 };
