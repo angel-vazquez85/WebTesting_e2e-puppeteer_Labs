@@ -3,6 +3,7 @@ const itShouldExist = require('./tests/existence');
 const { itShouldHaveTitle, itShouldHavePropperContentLength } = require('./tests/content');
 const itShouldAllowSubscribe = require('./tests/interaction');
 const takeScreenshot = require('./lib/screenshots');
+const itShouldBeFast = require('./tests/speed');
 
 async function start() {
   const { browser, pagePuppet } = await arrangeBrowser();
@@ -13,6 +14,7 @@ async function start() {
   numErrors += await itShouldHavePropperContentLength(pagePuppet);
   numErrors += await itShouldAllowSubscribe(pagePuppet);
   numErrors += await takeScreenshot(pagePuppet);
+  numErrors += await itShouldBeFast();
   await afterAll(browser, numErrors);
 }
 

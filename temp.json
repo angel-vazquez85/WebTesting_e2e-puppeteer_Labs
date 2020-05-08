@@ -1,0 +1,36 @@
+{
+  "pid": 5808,
+  "port": 64010,
+  "process": {
+    "_events": {},
+    "_eventsCount": 0,
+    "_closesNeeded": 1,
+    "_closesGot": 0,
+    "connected": false,
+    "signalCode": null,
+    "exitCode": null,
+    "killed": false,
+    "spawnfile": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    "_handle": { "pid": 5808 },
+    "spawnargs": [
+      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+      "--disable-translate",
+      "--disable-extensions",
+      "--disable-background-networking",
+      "--disable-sync",
+      "--metrics-recording-only",
+      "--disable-default-apps",
+      "--mute-audio",
+      "--no-first-run",
+      "--remote-debugging-port=64010",
+      "--user-data-dir=C:\\Users\\alber\\AppData\\Local\\Temp\\lighthouse.44156383",
+      "--disable-mobile-emulation --headless",
+      "about:blank"
+    ],
+    "pid": 5808,
+    "stdin": null,
+    "stdout": null,
+    "stderr": null,
+    "stdio": [null, null, null]
+  }
+}
