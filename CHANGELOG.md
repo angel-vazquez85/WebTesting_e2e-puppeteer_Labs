@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/compare/v1.5.0...v1.6.0) (2020-05-08)
+
+
+### Features
+
+* ⚓lighthouse ([d2fb3d4](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/commit/d2fb3d4579d412aa838d1eda6bfeec6a495fa526))
+
 ## [1.5.0](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/compare/v1.4.0...v1.5.0) (2020-05-07)
 
 
