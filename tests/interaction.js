@@ -20,7 +20,8 @@ module.exports = async function itShouldAllowSubscribe(pagePuppet) {
 
 async function actSelect(pagePuppet, selector) {
   await pagePuppet.evaluate(function (selector) {
-    return document.querySelector(selector).scrollBy(0, 10);
+    const down = 10;
+    return document.querySelector(selector).scrollBy(0, down);
   }, selector);
   await pagePuppet.focus(selector);
 }
