@@ -11,7 +11,8 @@ async function itShouldHaveTitle(pagePuppet) {
 
 async function itShouldHavePropperContentLength(pagePuppet) {
   const kiloByte = 1024;
-  const maximunExpected = kiloByte * 30;
+  const maximumKiloBytes = 30;
+  const maximunExpected = kiloByte * maximumKiloBytes;
   console.info(`GIVEN a page and a limit of ${maximunExpected} bytes`);
   console.info(`  WHEN we get its content lenght`);
   const actual = await actGetContentLength(pagePuppet);
