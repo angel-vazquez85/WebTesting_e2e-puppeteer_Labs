@@ -13,7 +13,6 @@ async function start() {
   numErrors += await itShouldHaveTitle(pagePuppet);
   numErrors += await itShouldHavePropperContentLength(pagePuppet);
   numErrors += await itShouldAllowSubscribe(pagePuppet);
-  numErrors += await takeScreenshot(pagePuppet);
   numErrors += await itShouldBeFast();
   await afterAll(browser, numErrors);
 }
