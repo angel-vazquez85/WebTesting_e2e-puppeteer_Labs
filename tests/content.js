@@ -1,36 +1,17 @@
-const { assertEqual, assertTrue } = require('../lib/assert');
+const { given, when, then } = require(`../lib/bit.tester`);
 
-async function itShouldHaveTitle(pagePuppet) {
-  console.info(`GIVEN a page`);
-  const expected = 'bitAdemy';
-  console.info(`  WHEN we get its title`);
-  //const actual = await pagePuppet.title();
-  const actual = await actGetTitle(pagePuppet);
-  console.info(`    THEN it Should Have Title: ${expected}`);
-  return assertEqual(actual, expected);
-}
-
-async function itShouldHavePropperContentLength(pagePuppet) {
-  const kiloByte = 1024;
-  const maximumKiloBytes = 30;
-  const maximunExpected = kiloByte * maximumKiloBytes;
-  console.info(`GIVEN a page and a limit of ${maximunExpected} bytes`);
-  console.info(`  WHEN we get its content lenght`);
-  const actual = await actGetContentLength(pagePuppet);
-  console.info(`    THEN it Should Have Propper Content Length less than: ${maximunExpected}`);
-  const failMessage = `     Actual Size ${actual} is bigger than maximun expected ${maximunExpected}`;
-  return assertTrue(actual < maximunExpected, failMessage);
-}
-
-async function actGetTitle(pagePuppet) {
-  return await pagePuppet.title();
-}
-async function actGetContentLength(pagePuppet) {
-  const content = await pagePuppet.content();
-  return content.length;
-}
-
-module.exports = {
-  itShouldHaveTitle,
-  itShouldHavePropperContentLength
+module.exports = async function (pagePuppet) {
+  await given(`A site url`, async () => {
+    const inputPageUrl = `https://www.bitademy.com`;
+    await when(`we download content`, async () => {
+      await pagePuppet.goto(inputPageUrl, { waitUntil: `networkidle2` });
+      const content = await pagePuppet.content();
+      const kiloByte = 1024;
+      const maximumKiloBytes = 30;
+      const maximunExpected = kiloByte * maximumKiloBytes;
+      let actual = content.length < maximunExpected;
+      let expected = true;
+      then(`content is smaller than ${maximunExpected} bytes`, actual, expected);
+    });
+  });
 };

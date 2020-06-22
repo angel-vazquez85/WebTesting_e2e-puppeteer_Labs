@@ -1,16 +1,16 @@
-const { assertTrue } = require('../lib/assert');
-module.exports = async function itShouldExist(pagePuppet) {
-  let errors = 1;
-  const inputPageUrl = 'https://www.bitademy.com';
-  console.info(`GIVEN the url: ${inputPageUrl}`);
-  try {
-    console.info(`  WHEN is visited`);
-    await pagePuppet.goto(inputPageUrl, { waitUntil: 'networkidle2' });
-    console.info(`    THEN it Should Exist a page: ${inputPageUrl}`);
-    errors = 0;
-  } catch (error) {
-    console.warn({ error });
-  }
-  assertTrue(errors == 0, `Could not visit the url: ${inputPageUrl}`);
-  return errors;
+const { given, when, then } = require(`../lib/bit.tester`);
+
+module.exports = async function (pagePuppet) {
+  await given(`A site url`, async () => {
+    const inputPageUrl = `https://www.bitademy.com`;
+    await when(`we visit it`, async () => {
+      const response = await pagePuppet.goto(inputPageUrl, { waitUntil: `load` });
+      let actual = response.ok();
+      let expected = true;
+      then(`respond with an ok status code`, actual, expected);
+      actual = await pagePuppet.title();
+      expected = `bitAdemy`;
+      then(`have a correct title`, actual, expected);
+    });
+  });
 };
