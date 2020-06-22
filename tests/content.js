@@ -4,6 +4,7 @@ async function itShouldHaveTitle(pagePuppet) {
   console.info(`GIVEN a page`);
   const expected = 'bitAdemy';
   console.info(`  WHEN we get its title`);
+  //const actual = await pagePuppet.title();
   const actual = await actGetTitle(pagePuppet);
   console.info(`    THEN it Should Have Title: ${expected}`);
   return assertEqual(actual, expected);

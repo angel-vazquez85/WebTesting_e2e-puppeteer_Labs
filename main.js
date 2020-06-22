@@ -1,40 +1,60 @@
-const puppeteer = require('puppeteer');
-const itShouldExist = require('./tests/existence');
-const { itShouldHaveTitle, itShouldHavePropperContentLength } = require('./tests/content');
-const itShouldAllowSubscribe = require('./tests/interaction');
-const takeScreenshot = require('./lib/screenshots');
-const itShouldBeFast = require('./tests/speed');
+const { given, when, then, equals } = require(`./tests/bit.tester`);
+const puppeteer = require(`puppeteer`);
+const path = require('path');
+let browser;
+given(`A site url`, async () => {
+  const browser = await arrangeBrowser();
+  const pagePuppet = await browser.newPage();
+  const inputPageUrl = `https://www.bitademy.com`;
+  when(`we visit it`, async () => {
+    const response = await pagePuppet.goto(inputPageUrl, { waitUntil: `load` });
+    await takeScreenshot(pagePuppet);
+    let assert = {
+      fn: equals,
+      actual: response.ok(),
+      expected: true
+    };
+    then(`respond with an ok status code`, assert);
+    assert.actual = await pagePuppet.title();
+    assert.expected = `bitAdemy`;
+    then(`have a correct title`, assert);
+    await browser.close();
+  });
+});
 
-async function start() {
-  const { browser, pagePuppet } = await arrangeBrowser();
-  let numErrors = 0;
-  numErrors += await itShouldExist(pagePuppet);
-  numErrors += await takeScreenshot(pagePuppet);
-  numErrors += await itShouldHaveTitle(pagePuppet);
-  numErrors += await itShouldHavePropperContentLength(pagePuppet);
-  numErrors += await itShouldAllowSubscribe(pagePuppet);
-  numErrors += await itShouldBeFast();
-  await afterAll(browser, numErrors);
-}
+// given(`A site url`, async () => {
+//   const browser = await arrangeBrowser();
+//   const pagePuppet = await browser.newPage();
+//   const inputPageUrl = `https://www.bitademy.com`;
+//   when(`we download content`, async () => {
+//     await pagePuppet.goto(inputPageUrl, { waitUntil: `networkidle2` });
+//     await takeScreenshot(pagePuppet);
+//     const content = await pagePuppet.content();
+//     const kiloByte = 1024;
+//     const maximumKiloBytes = 30;
+//     const maximunExpected = kiloByte * maximumKiloBytes;
+//     let actual = content.length < maximunExpected;
+//     let expected = true;
+//     then(`content is smaller than ${maximunExpected} bytes`, actual, expected);
+//     await browser.close();
+//   });
+// });
 
 async function arrangeBrowser() {
-  console.info(`arranging browser `);
-  const browser = await puppeteer.launch({
-    headless: true,
-    defaultViewport: { width: 1920, height: 1080 }
-  });
-  const pagePuppet = await browser.newPage();
-  return { browser, pagePuppet };
-}
-
-async function afterAll(browser, numErrors) {
-  await browser.close();
-  if (numErrors) {
-    console.warn(`🔴 FAIL: there are ${numErrors} site errors`);
-  } else {
-    console.info('🟩 SUCCESS: all tests completed successfully');
+  if (!browser) {
+    browser = await puppeteer.launch({
+      headless: true,
+      defaultViewport: { width: 1920, height: 1080 }
+    });
   }
-  process.exit(numErrors);
+  return browser;
 }
 
-start();
+async function takeScreenshot(pagePuppet) {
+  const timeStamp = new Date().getTime();
+  const shotPath = path.join(process.cwd(), 'images', `${timeStamp}.png`);
+  await pagePuppet.screenshot({
+    path: shotPath,
+    fullPage: true
+  });
+}

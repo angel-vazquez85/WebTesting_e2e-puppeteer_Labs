@@ -21,16 +21,16 @@
     "deploy": "standard-version && git push --follow-tags origin master"
   },
   "devDependencies": {
-    "eslint": "7.1.0",
+    "eslint": "7.3.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.4",
     "prettier": "2.0.5",
     "standard-version": "^8.0.0"
   },
   "dependencies": {
     "lighthouse": "^6.0.0",
-    "puppeteer": "^3.1.0",
+    "puppeteer": "^4.0.0",
     "request": "^2.88.2"
   },
   "nodemonConfig": {
