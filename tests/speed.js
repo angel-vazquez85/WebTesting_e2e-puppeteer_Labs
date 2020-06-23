@@ -1,69 +1,81 @@
-const { assertTrue } = require('../lib/assert');
+const { given, when, then } = require(`../lib/bit.tester`);
 const chromeLauncher = require('chrome-launcher');
 const lh_desktop_config = require('lighthouse/lighthouse-core/config/lr-desktop-config.js');
 const lighthouse = require('lighthouse');
 const puppeteer = require('puppeteer');
 const request = require('request');
 const util = require('util');
-const config = {
+const chrome_config = {
   output: 'json',
   chromeFlags: ['--disable-mobile-emulation --headless']
 };
-module.exports = async function itShouldBeFast() {
-  const inputPageUrl = 'https://www.bitademy.com';
-  const { chrome, browser } = await arrangeBrowser();
-  console.info(`GIVEN chrome attached : ${chrome.port}`);
-  console.info(`  WHEN ${inputPageUrl} is scanned with lighthouse`);
-  const actualAudits = await actGetReport(inputPageUrl);
-  const actual = getSpeedIndex(actualAudits).score;
-  const minimunExpected = 0.89;
-  console.info(`    THEN it Should be faster than: ${minimunExpected}`);
-  const failMessage = `     Actual Speed Index ${actual} is lower than minimum expected ${minimunExpected}`;
-  await afterAll({ chrome, browser });
-  return assertTrue(actual > minimunExpected, failMessage);
+
+module.exports = async function () {
+  await given(`A deployed site`, async () => {
+    const inputPageUrl = `https://www.bitademy.com`;
+    const { chrome, browser } = await arrangeBrowser();
+    await when(`we get the page audit scores`, async () => {
+      const actualAudits = await getAudits(inputPageUrl);
+      const minimunExpected = 0.89;
+      const expected = true;
+      let score = getAuditScore(actualAudits, 'speed-index');
+      let actual = score > minimunExpected;
+      then(`Speed Index faster than ${minimunExpected}`, actual, expected);
+      score = getAuditScore(actualAudits, 'first-meaningful-paint');
+      actual = score > minimunExpected;
+      then(`First Meaningful Paint better than ${minimunExpected}`, actual, expected);
+      score = getAuditScore(actualAudits, 'first-cpu-idle');
+      actual = score > minimunExpected;
+      then(`First CPU Idle better than ${minimunExpected}`, actual, expected);
+      score = getAuditScore(actualAudits, 'interactive');
+      actual = score > minimunExpected;
+      then(`Time to Interactive better than ${minimunExpected}`, actual, expected);
+    });
+    await afterAll({ chrome, browser });
+  });
 };
 
 async function arrangeBrowser() {
   const chrome = await launchChrome();
-  console.info(`chrome.port : ${chrome.port}`);
   const browser = await connectToChrome(chrome);
   return { chrome, browser };
 }
 
 async function launchChrome() {
-  const chrome = await chromeLauncher.launch(config);
-  config.port = chrome.port;
-  console.log(`Chrome launched at port: ${chrome.port}`);
+  const chrome = await chromeLauncher.launch(chrome_config);
+  chrome_config.port = chrome.port;
   return chrome;
 }
 async function connectToChrome(chrome) {
-  const resp = await util.promisify(request)(`http://localhost:${chrome.port}/json/version`);
-  const { webSocketDebuggerUrl } = JSON.parse(resp.body);
+  const response = await util.promisify(request)(`http://localhost:${chrome.port}/json/version`);
+  const { webSocketDebuggerUrl } = JSON.parse(response.body);
   const browser = await puppeteer.connect({ browserWSEndpoint: webSocketDebuggerUrl });
-  console.log(`Browser connected at url: ${browser._connection._url}`);
   return browser;
 }
 
-async function actGetReport(url) {
+async function getAudits(url) {
   lh_desktop_config.settings.skipAudits = null;
-  lh_desktop_config.settings.onlyAudits = ['speed-index'];
-  const report = await lighthouse(url, config, lh_desktop_config).then(results => {
-    return results;
-  });
-  const audits = getSimpleArray(report.lhr.audits);
-  console.log(`lighthouse audits: ${JSON.stringify(audits)}`);
-  return audits;
+  lh_desktop_config.settings.onlyAudits = [
+    'first-meaningful-paint',
+    'speed-index',
+    'first-cpu-idle',
+    'interactive'
+  ];
+  const lh_audits = await lighthouse(url, chrome_config, lh_desktop_config).then(
+    results => results.lhr.audits
+  );
+  return mapToSimpleArray(lh_audits);
 }
 
-function getSimpleArray(property) {
-  return Object.keys(property).map(x => ({
-    id: x,
-    title: property[x].title,
-    score: property[x].score
+function mapToSimpleArray(lh_audits) {
+  return Object.keys(lh_audits).map(audit => ({
+    id: audit,
+    title: lh_audits[audit].title,
+    score: lh_audits[audit].score
   }));
 }
-function getSpeedIndex(audits) {
-  return audits.find(a => a.id === 'speed-index');
+function getAuditScore(audits, auditId) {
+  return audits.find(a => a.id === auditId).score;
 }
 
 async function afterAll({ chrome, browser }) {

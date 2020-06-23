@@ -4,6 +4,7 @@ const testContent = require(`./tests/content`);
 const testInteraction = require(`./tests/interaction`);
 const testEmulation = require(`./tests/emulation`);
 const testValidity = require(`./tests/validity`);
+const testSpeed = require(`./tests/speed`);
 async function test() {
   const { browser, pagePuppet } = await arrangeBefore();
   // await testExistence(pagePuppet);
@@ -12,6 +13,7 @@ async function test() {
   // await testEmulation(pagePuppet);
   // await testValidity( pagePuppet );
   // await takeScreenshot( pagePuppet );
+  await testSpeed();
   await cleanAfter(browser);
 }
 async function arrangeBefore() {
