@@ -7,12 +7,12 @@ const testValidity = require(`./tests/validity`);
 const testSpeed = require(`./tests/speed`);
 async function test() {
   const { browser, pagePuppet } = await arrangeBefore();
-  // await testExistence(pagePuppet);
-  // await testContent(pagePuppet);
-  // await testInteraction(pagePuppet);
-  // await testEmulation(pagePuppet);
-  // await testValidity( pagePuppet );
-  // await takeScreenshot( pagePuppet );
+  await testExistence(pagePuppet);
+  await testContent(pagePuppet);
+  await testInteraction(pagePuppet);
+  await testEmulation(pagePuppet);
+  await testValidity(pagePuppet);
+  await takeScreenshot(pagePuppet);
   await testSpeed();
   await cleanAfter(browser);
 }
