@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/compare/v1.8.0...v1.9.0) (2020-06-26)
+
+
+### Features
+
+* 📹 api test ([aeaff24](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/commit/aeaff241f2f421fb5ff95dc9f4b0c9fe46a92fde))
+* 📹 video puppeteer ([d4aebba](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/commit/d4aebbaab61095037b592f34afd71d2167763c1a))
+
 ## [1.8.0](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/compare/v1.7.0...v1.8.0) (2020-06-23)
 
 
