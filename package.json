@@ -31,7 +31,8 @@
   "dependencies": {
     "lighthouse": "^6.1.0",
     "puppeteer": "^4.0.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "supertest": "^4.0.2"
   },
   "nodemonConfig": {
     "ignore": [
