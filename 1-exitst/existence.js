@@ -1,7 +1,7 @@
 const { given, when, then } = require(`../lib/bit.tester`);
 
 module.exports = async function (pagePuppet) {
-  const inputPageUrl = `https://www.bitademy.com/`;
+  const inputPageUrl = `https://www.bitademy.com`;
   await given(`A the url ${inputPageUrl}`, async () => {
     await when(`we visit it`, async () => {
       const response = await pagePuppet.goto(inputPageUrl, { waitUntil: `load` });
