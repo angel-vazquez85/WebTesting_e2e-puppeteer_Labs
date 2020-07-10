@@ -8,7 +8,7 @@ module.exports = async function (pagePuppet) {
       const actual = await pagePuppet.evaluate(() =>
         window.find(`a:is(:not([href]),[href=""],[href="#"])`)
       );
-      let expected = false;
+      const expected = false;
       then(`have no one`, actual, expected);
     });
   });
