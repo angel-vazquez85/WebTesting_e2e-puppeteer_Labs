@@ -1,10 +1,10 @@
-const { given, when, then } = require(`../lib/bit.tester`);
-const request = require(`supertest`);
+import request from 'supertest';
+import { given, then, when } from '../lib/bit.tester';
 
-module.exports = async function () {
+export async function api() {
   await getHello();
   await postProject();
-};
+}
 async function getHello() {
   const inputHostUrl = `https://api-base.herokuapp.com`;
   await given(`the API url ${inputHostUrl}`, async () => {

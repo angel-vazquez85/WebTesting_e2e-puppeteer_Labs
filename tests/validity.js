@@ -1,4 +1,4 @@
-const { given, when, then } = require(`../lib/bit.tester`);
+import { given, then, when } from '../lib/bit.tester';
 
 module.exports = async function (pagePuppet) {
   await given(`A site url`, async () => {

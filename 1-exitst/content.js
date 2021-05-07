@@ -1,5 +1,6 @@
-const { given, when, then } = require(`../lib/bit.tester`);
-module.exports = async function (pagePuppet) {
+import { given, then, when } from '../lib/bit.tester';
+
+export async function chechContent(pagePuppet) {
   const inputPageUrl = `https://www.bitademy.com/`;
   await given(`A the page at ${inputPageUrl}`, async () => {
     await when(`we get its title`, async () => {
@@ -9,4 +10,4 @@ module.exports = async function (pagePuppet) {
       then(`it is ${expected}`, actual, expected);
     });
   });
-};
+}

@@ -1,8 +1,8 @@
-const { given, when, then } = require(`../lib/bit.tester`);
-const { arrangeBrowser } = require(`../lib/lighter`);
-const { getAudits } = require(`../lib/auditor`);
+import { getAudits } from '../lib/auditor';
+import { given, then, when } from '../lib/bit.tester';
+import { arrangeBrowser } from '../lib/lighter';
 
-module.exports = async function () {
+export async function () {
   await given(`A deployed site`, async () => {
     const inputPageUrl = `https://www.bitademy.com`;
     const { chrome, browser, chrome_config } = await arrangeBrowser();
@@ -19,12 +19,3 @@ module.exports = async function () {
   });
 };
 
-// score = audits.find(a => a.id === 'first-meaningful-paint').score;
-// actual = score > minimumExpected;
-// then(`First Meaningful Paint better than ${minimumExpected}`, actual, expected);
-// score = audits.find(a => a.id === 'first-cpu-idle').score;
-// actual = score > minimumExpected;
-// then(`First CPU Idle better than ${minimumExpected}`, actual, expected);
-// score = audits.find(a => a.id === 'interactive').score;
-// actual = score > minimumExpected;
-// then(`Time to Interactive better than ${minimumExpected}`, actual, expected);

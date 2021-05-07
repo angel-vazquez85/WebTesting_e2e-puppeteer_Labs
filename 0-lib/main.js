@@ -8,6 +8,3 @@ async function test() {
   await closeBrowser(browser);
 }
 test();
-
-// const { getBrowser, closeBrowser, takeScreenshot } = require(`./lib/puppets`);
-// await takeScreenshot(pagePuppet);
