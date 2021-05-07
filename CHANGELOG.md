@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/compare/v2.0.0...v2.0.1) (2021-05-07)
+
+
+### Bug Fixes
+
+* imports ([1766951](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/commit/17669517a82e41eefaa7abfe86af02d8adf0fbe9))
+
 ## [2.0.0](https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/compare/v1.9.1...v2.0.0) (2021-05-07)
 
 
