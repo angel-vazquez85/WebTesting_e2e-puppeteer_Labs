@@ -1,8 +1,8 @@
-import { getAudits } from '../lib/auditor';
-import { given, then, when } from '../lib/bit.tester';
-import { arrangeBrowser } from '../lib/lighter';
+import { getAudits } from '../lib/auditor.js';
+import { given, then, when } from '../lib/bit.tester.js';
+import { arrangeBrowser } from '../lib/lighter.js';
 
-export async function () {
+export default async function speed() {
   await given(`A deployed site`, async () => {
     const inputPageUrl = `https://www.bitademy.com`;
     const { chrome, browser, chrome_config } = await arrangeBrowser();
@@ -17,5 +17,4 @@ export async function () {
     browser.disconnect();
     await chrome.kill();
   });
-};
-
+}

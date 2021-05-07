@@ -1,11 +1,11 @@
-const { getBrowser, closeBrowser, takeScreenshot } = require(`./lib/puppets`);
-const testExistence = require(`./tests/existence`);
-const testContent = require(`./tests/content`);
-const testInteraction = require(`./tests/interaction`);
-const testEmulation = require(`./tests/emulation`);
-const testValidity = require(`./tests/validity`);
-const testSpeed = require(`./tests/speed`);
-const testApi = require(`./tests/api`);
+import { closeBrowser, getBrowser, takeScreenshot } from './lib/puppets.js';
+import testApi from './tests/api.js';
+import testContent from './tests/content.js';
+import testEmulation from './tests/emulation.js';
+import testExistence from './tests/existence.js';
+import testInteraction from './tests/interaction.js';
+import testSpeed from './tests/speed.js';
+import testValidity from './tests/validity.js';
 
 async function test() {
   const { browser, pagePuppet } = await arrangeBefore();

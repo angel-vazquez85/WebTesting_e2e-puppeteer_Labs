@@ -1,6 +1,6 @@
-import { given, then, when } from '../lib/bit.tester';
+import { given, then, when } from '../lib/bit.tester.js';
 
-export async function (pagePuppet) {
+export default async function emulation(pagePuppet) {
   await given(`Any page of my site`, async () => {
     const inputPageUrl = `https://www.bitademy.com`;
     const inputUserAgent =
@@ -18,4 +18,4 @@ export async function (pagePuppet) {
       then(`it hides main-navigation`, actual, expected);
     });
   });
-};
+}

@@ -1,6 +1,6 @@
-import { given, then, when } from '../lib/bit.tester';
+import { given, then, when } from '../lib/bit.tester.js';
 
-export async function (pagePuppet) {
+export default async function interaction(pagePuppet) {
   await given(`A term to find on google`, async () => {
     const inputPageUrl = `https://www.google.com`;
     const inputTerm = `bitAdemy`;
@@ -15,4 +15,4 @@ export async function (pagePuppet) {
       then(`the related site is found`, actual, expected);
     });
   });
-};
+}

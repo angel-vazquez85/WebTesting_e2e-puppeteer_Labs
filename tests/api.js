@@ -1,7 +1,7 @@
 import request from 'supertest';
-import { given, then, when } from '../lib/bit.tester';
+import { given, then, when } from '../lib/bit.tester.js';
 
-export async function api() {
+export default async function api() {
   await getHello();
   await postProject();
 }

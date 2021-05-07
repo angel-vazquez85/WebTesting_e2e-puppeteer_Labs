@@ -1,6 +1,6 @@
-import { given, then, when } from '../lib/bit.tester';
+import { given, then, when } from '../lib/bit.tester.js';
 
-export async function (pagePuppet) {
+export default async function existence(pagePuppet) {
   const inputPageUrl = `https://www.bitademy.com/`;
   await given(`A the url ${inputPageUrl}`, async () => {
     await when(`we visit it`, async () => {
@@ -10,4 +10,4 @@ export async function (pagePuppet) {
       then(`respond with an ok status code`, actual, expected);
     });
   });
-};
+}

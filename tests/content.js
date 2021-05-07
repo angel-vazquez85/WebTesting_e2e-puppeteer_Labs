@@ -1,6 +1,6 @@
-import { given, then, when } from '../lib/bit.tester';
+import { given, then, when } from '../lib/bit.tester.js';
 
-export async function (pagePuppet) {
+export default async function content(pagePuppet) {
   const inputPageUrl = `https://www.bitademy.com/`;
   await given(`A the page at ${inputPageUrl}`, async () => {
     await when(`we get its title`, async () => {
@@ -20,4 +20,4 @@ export async function (pagePuppet) {
       then(`it is smaller than ${maximunExpected} bytes`, actual, expected);
     });
   });
-};
+}
