@@ -1,9 +1,8 @@
-// const path = require(`path`);
-
-const puppeteer = require(`puppeteer`);
+import path from 'path';
+import puppeteer from 'puppeteer';
 
 let browser = null;
-exports.getBrowser = async function getBrowser() {
+export async function getBrowser() {
   if (!browser) {
     browser = await puppeteer.launch({
       headless: false,
@@ -12,17 +11,17 @@ exports.getBrowser = async function getBrowser() {
     });
   }
   return browser;
-};
+}
 
-exports.closeBrowser = async function close(browser) {
+export async function closeBrowser(browser) {
   await browser.close();
-};
+}
 
-// exports.takeScreenshot = async function takeScreenshot(pagePuppet) {
-//   const timeStamp = new Date().getTime();
-//   const shotPath = path.join(process.cwd(), 'images', `${timeStamp}.png`);
-//   await pagePuppet.screenshot({
-//     path: shotPath,
-//     fullPage: false
-//   });
-// };
+export async function takeScreenshot(pagePuppet) {
+  const timeStamp = new Date().getTime();
+  const shotPath = path.join(process.cwd(), 'output', `${timeStamp}.png`);
+  await pagePuppet.screenshot({
+    path: shotPath,
+    fullPage: false
+  });
+}

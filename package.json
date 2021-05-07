@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/LabsAdemy/WebTesting_e2e-puppeteer_Labs/issues"
   },
+  "type": "module",
   "scripts": {
     "start": "nodemon main.js",
     "deploy": "standard-version && git push --follow-tags origin master",
