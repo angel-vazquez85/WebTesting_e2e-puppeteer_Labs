@@ -21,12 +21,15 @@
     "start": "nodemon main.js",
     "predeploy": "standard-version ",
     "deploy": "git push --follow-tags origin main",
+    "api": "json-server-auth ./database/db.json -r ./database/routes.json",
     "updates": "ncu -u"
   },
   "devDependencies": {
     "eslint": "8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0",
     "nodemon": "^2.0.20",
     "prettier": "2.7.1",
     "standard-version": "^9.5.0",
