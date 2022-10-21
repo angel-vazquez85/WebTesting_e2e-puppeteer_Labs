@@ -31,13 +31,13 @@
     "json-server": "^0.17.0",
     "json-server-auth": "^2.1.0",
     "nodemon": "^2.0.20",
+    "npm-check-updates": "^16.3.14",
     "prettier": "2.7.1",
-    "standard-version": "^9.5.0",
-    "npm-check-updates": "^16.3.11"
+    "standard-version": "^9.5.0"
   },
   "dependencies": {
     "lighthouse": "^9.6.7",
-    "puppeteer": "^18.2.1",
+    "puppeteer": "^19.0.0",
     "request": "^2.88.2",
     "supertest": "^6.3.0"
   },
