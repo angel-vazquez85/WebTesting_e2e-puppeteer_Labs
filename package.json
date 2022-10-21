@@ -18,7 +18,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "nodemon main.js",
+    "start": "nodemon main.js --ignore database/",
     "predeploy": "standard-version ",
     "deploy": "git push --follow-tags origin main",
     "api": "json-server-auth ./database/db.json -r ./database/routes.json",

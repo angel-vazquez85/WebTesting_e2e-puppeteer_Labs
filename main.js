@@ -1,11 +1,5 @@
-import { closeBrowser, getBrowser, takeScreenshot } from './lib/puppets.js';
-import testApi from './tests/api.js';
-import testContent from './tests/content.js';
-import testEmulation from './tests/emulation.js';
-import testExistence from './tests/existence.js';
-import testInteraction from './tests/interaction.js';
-import testSpeed from './tests/speed.js';
-import testValidity from './tests/validity.js';
+import { closeBrowser, getBrowser } from "./lib/puppets.js";
+import testApi from "./tests/api.js";
 
 async function test() {
   const { browser, pagePuppet } = await arrangeBefore();

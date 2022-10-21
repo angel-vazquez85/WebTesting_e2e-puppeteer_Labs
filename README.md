@@ -2,8 +2,15 @@
 
 Laboratories for [Web Testing course](https://www.trainingit.es/index.php/producto/curso-testing-aplicaciones-web/). Performance E2E with Puppeteer
 
-```
+## Local API server
+
+For testing an API server, there are a local one in this repo. Please follow the instructions to run
+
+```bash
 npm i
+# run in one terminal
+npm run api
+# run in another one
 npm start
 ```
 
