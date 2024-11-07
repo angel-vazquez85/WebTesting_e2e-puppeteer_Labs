@@ -1,4 +1,4 @@
-import { given, then, when } from "../lib/bit.tester";
+import { given, then, when } from "../lib/bit.tester.js";
 export async function checkExistence(pagePuppet) {
   const inputPageUrl = `https://www.trainingit.es/`;
   await given(`A the url ${inputPageUrl}`, async () => {
