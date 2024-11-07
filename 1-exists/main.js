@@ -1,9 +1,11 @@
-const { getBrowser, closeBrowser } = require(`./lib/puppets`);
+import { getBrowser, closeBrowser } from "../lib/puppets.js";
+import { checkExistence } from "./existence.js";
+
 
 async function test() {
   const browser = await getBrowser();
   const pagePuppet = await browser.newPage();
-  await testExistence(pagePuppet);
+  await checkExistence(pagePuppet);
   await closeBrowser(browser);
 }
 test();

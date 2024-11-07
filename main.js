@@ -1,16 +1,22 @@
-import { closeBrowser, getBrowser } from "./lib/puppets.js";
+import { checkContent } from "./1-exists/content.js";
+import { checkExistence } from "./1-exists/existence.js";
+import { closeBrowser, getBrowser, takeScreenshot } from "./lib/puppets.js";
 import testApi from "./tests/api.js";
+import interaction from "./tests/interaction.js";
+import speed from "./tests/speed.js";
+import emulation from "./tests/emulation.js";
+import validity from "./tests/validity.js";
 
 async function test() {
   const { browser, pagePuppet } = await arrangeBefore();
-  await testExistence(pagePuppet);
-  await testContent(pagePuppet);
-  await testInteraction(pagePuppet);
-  await testEmulation(pagePuppet);
-  await testValidity(pagePuppet);
+  await checkExistence(pagePuppet);
+  await checkContent(pagePuppet);
+  await interaction(pagePuppet);
+  await emulation(pagePuppet);
+  await validity(pagePuppet);
   await takeScreenshot(pagePuppet);
   await cleanAfter(browser);
-  await testSpeed();
+  await speed(); 
   await testApi();
 }
 async function arrangeBefore() {
